@@ -1,6 +1,7 @@
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import Navigation from "./root_navigation/navigation";
+import Navigation from "./rootNavigation/Navigation";
+
 
 function App() {
   return (
