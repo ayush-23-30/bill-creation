@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import logo from "../../assets/Logo.png";
 import hero from "../../assets/login_img.avif";
-import { CustomButton, CustomInput, PasswordInput } from "../../utils/utils";
+import { CustomButton, CustomInput, PasswordInput } from "../../util/utils";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import logo from "../../assets/Logo.png";
 import hero from "../../assets/login_img.avif";
-import { CustomButton, CustomInput, PasswordInput } from "../../utils/utils";
+import { CustomButton, CustomInput, PasswordInput } from "../../util/utils";
 import { useNavigate } from "react-router-dom";
 
 function SignUp() {
@@ -16,18 +16,16 @@ function SignUp() {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-const navigate= useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log("Updated formData:", formData);
   }, [formData]);
-  
 
   const handleChange = (e) => {
     console.log(e.target.name, e.target.value); // Debugging log
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  
 
   const validateForm = () => {
     let newErrors = {};
@@ -39,13 +37,13 @@ const navigate= useNavigate();
     if (!formData.gender) newErrors.gender = "Select a gender.";
     if (
       !formData.password.trim() ||
-      formData.password.length < 8 || 
+      formData.password.length < 8 ||
       !/[A-Z]/.test(formData.password) || // At least one uppercase letter
       !/[!@#$%^&*(),.?":{}|<>]/.test(formData.password) // At least one special character
     ) {
-      newErrors.password = "Password must be at least 8 characters, include 1 uppercase letter, and 1 special character.";
+      newErrors.password =
+        "Password must be at least 8 characters, include 1 uppercase letter, and 1 special character.";
     }
-    
 
     if (formData.password !== formData.confirmPassword)
       newErrors.confirmPassword = "Passwords do not match.";
@@ -178,11 +176,10 @@ const navigate= useNavigate();
             <CustomButton
               onClick={handleClick}
               loading={loading}
-              disabled = {loading}
+              disabled={loading}
             >
               Create Account
             </CustomButton>
-
           </div>
 
           {/* Divider */}
@@ -195,7 +192,10 @@ const navigate= useNavigate();
 
           {/* Login Link */}
 
-          <div className="border cursor-pointer w-full border-gray-300 rounded-md shadow-md text-center py-2 hover:bg-gray-200 transition"onClick={() => navigate("/")}>
+          <div
+            className="border cursor-pointer w-full border-gray-300 rounded-md shadow-md text-center py-2 hover:bg-gray-200 transition"
+            onClick={() => navigate("/")}
+          >
             <p className="font-semibold">
               Have an account?{" "}
               <span
