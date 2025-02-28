@@ -217,7 +217,7 @@ function SignUp() {
         <div className="hidden lg:flex m-4 items-center justify-center w-1/2 h-screen">
           <img
             src={hero}
-            className="w-full rounded-2xl  h-full object-cover"
+            className="w-full rounded-2xl max-w-[600px] max-h-[670px] object-cover"
             alt="Login Hero"
           />
         </div>
