@@ -37,8 +37,16 @@ const navigate= useNavigate();
     if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email))
       newErrors.email = "Enter a valid email address.";
     if (!formData.gender) newErrors.gender = "Select a gender.";
-    if (!formData.password.trim() || formData.password.length < 6)
-      newErrors.password = "Password must be at least 6 characters.";
+    if (
+      !formData.password.trim() ||
+      formData.password.length < 8 || 
+      !/[A-Z]/.test(formData.password) || // At least one uppercase letter
+      !/[!@#$%^&*(),.?":{}|<>]/.test(formData.password) // At least one special character
+    ) {
+      newErrors.password = "Password must be at least 8 characters, include 1 uppercase letter, and 1 special character.";
+    }
+    
+
     if (formData.password !== formData.confirmPassword)
       newErrors.confirmPassword = "Passwords do not match.";
     setErrors(newErrors);
