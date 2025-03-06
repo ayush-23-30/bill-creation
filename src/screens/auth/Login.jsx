@@ -28,7 +28,7 @@ function Login() {
       setLoading(false);
       console.log("Email: ", email);
       console.log("Password: ", password);
-      toast.info("This feature will work soon"); // Notify user
+      navigate('/dashboard'); // Redirect to dashboard
     }, 2000);
   };
 
