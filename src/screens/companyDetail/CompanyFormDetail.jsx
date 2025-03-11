@@ -1,45 +1,36 @@
 import React, { useState } from "react";
 import { Wizard, useWizard } from "react-use-wizard";
-import StepOne from "../companyDetail/StepOne";
-import StepTwo from "../companyDetail/StepTwo";
-import StepThree from "../companyDetail/StepThree";
+import CompanyCreation from "./CompanyCreation";
+import CompanyAlteration from "./CompanyAlteration";
+import StepThree from "./CompanyAlteration_two";
 import StepFour from "../companyDetail/StepFour";
-import SubHeader from "../common/SubHeader";
+import Header from "../common/Header";
+import CompanyAlteration_two from "./CompanyAlteration_two";
 
 
 
 export default function WizardComponent() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    city: "",
-    address: "",
-    phone: "",
-    gender: "",
-    age: "",
-    country: "",
-    state: "",
-    zipCode: "",
-    company: "",
-    experience: "",
-    skills: "",
-    github: "",
-    linkedin: "",
-  });
+
 
 
   return (
     <>
-      <SubHeader/>
+    <div className="bg-gradient-to-b from-[#5e77e9] to-[#0070FA]  text-white">
+      <Header/>
     <div className="w-full mx-auto p-6">
-      <Wizard>
-        <StepOne formData={formData} setFormData={setFormData} />
-        <StepTwo formData={formData} setFormData={setFormData} />
-        <StepThree formData={formData} setFormData={setFormData} />
-        <StepFour formData={formData} setFormData={setFormData}/>
-      </Wizard>
+    
+
+<Wizard>
+          <CompanyCreation />
+          <CompanyAlteration />
+          <CompanyAlteration_two />
+          <StepFour />
+        </Wizard>
+
     </div>
+
+    </div>
+
     
     </>
   );

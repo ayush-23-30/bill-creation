@@ -17,7 +17,7 @@ export const CustomInput = ({
       placeholder={placeholder}
       onChange={onChange}
       value={value}
-      className={` border border-gray-300 bg-white rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 `}
+      className={` border border-gray-400 bg-[#efefef] rounded-md p-2 w-full focus:outline-none  max-h-[42px] placeholder:text-black focus:ring-2 focus:ring-blue-500`}
      
     />
   );
@@ -34,7 +34,7 @@ export const PasswordInput = ({ placeholder, value, onChange , name }) => {
         value={value}
         name = {name}
         onChange={onChange}
-        className="border border-gray-300 bg-white rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="border border-gray-400 bg-[#efefef] rounded-md placeholder:text-black p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
       <button
         type="button"

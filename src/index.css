@@ -122,3 +122,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+::selection {
+  background-color: red;
+  color: yellow;
+}

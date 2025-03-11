@@ -18,7 +18,11 @@ export default function StepFour({ formData, setFormData }) {
     console.log("Form Data Submitted:", formData);
   };
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   return (
