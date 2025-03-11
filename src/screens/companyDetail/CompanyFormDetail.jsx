@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Wizard, useWizard } from "react-use-wizard";
 import CompanyCreation from "./CompanyCreation";
 import CompanyAlteration from "./CompanyAlteration";
-import StepThree from "./CompanyAlteration_two";
-import StepFour from "../companyDetail/StepFour";
+
 import Header from "../common/Header";
 import CompanyAlteration_two from "./CompanyAlteration_two";
+import CompanyCalculation from "./CompanyCalculation";
 
 
 
@@ -24,7 +24,7 @@ export default function WizardComponent() {
           <CompanyCreation />
           <CompanyAlteration />
           <CompanyAlteration_two />
-          <StepFour />
+          <CompanyCalculation />
         </Wizard>
 
     </div>
