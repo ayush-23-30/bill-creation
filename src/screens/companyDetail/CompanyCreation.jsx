@@ -2,24 +2,41 @@ import React, { useState } from "react";
 import { useWizard } from "react-use-wizard";
 import { CustomInput } from "../../util/utils";
 import { useFormData } from "@/util/ContectApi";
+import { LOCATIONS } from "@/util/Data";
+import Select from "react-dropdown-select";
+
 
 
 // export default function StepOne({ formData, setFormData }) {
 
 export default function CompanyCreation() {
   const { nextStep, activeStep } = useWizard();
-  const { formData, updateFormData } = useFormData();
+  const { formData, updateFormData , updateSelect } = useFormData();
+
+
+  // const [selectedLocation, setSelectedLocation] = useState(null);
+
+
+const handleChangeselect = (selected) => {
+ 
+  const selectedState = selected[0]?.label;  // Extract label of the selected state
+  updateSelect('companyCreation', 'state', selectedState);  // Update state field in companyCreation
+};
+
+// console.log("state ---", formData.companyCreation.state);
+
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     updateFormData('companyCreation', name, value);  // 'companyCreation' section
   };
-  // console.log(formData);
   
-// function showData (){
-//   console.log("cration", formData?.companyCreation);
-  
-// }
+function showData (){
+  console.log("cration", formData?.companyCreation);
+}
+
+// console.log("locations", LOCATIONS);
 
   function pfInputFeilds() {
     return (
@@ -27,8 +44,8 @@ export default function CompanyCreation() {
         <div className="flex border-2 p-4 rounded-2xl flex-wrap mb-6 text-black">
           {/* ------ Set of two input Fields ----- */}
           <div className="flex flex-row gap-4 mb-4 w-full">
-            <div className="flex flex-row gap-4 w-full">
-               <p className="flex font-semibold  justify-end text-center w-1/3">Company Name</p>
+          <div className="flex items-center flex-row gap-4 w-full">
+               <p className="flex leading-4 font-semibold  justify-end text-center w-1/3">Company Name</p>
               <CustomInput
                 name="companyName"
                 type="text"
@@ -38,9 +55,8 @@ export default function CompanyCreation() {
                 className="w-full"
               />
             </div>
-
-            <div className="flex gap-4 w-full">
-               <p className="flex font-semibold justify-end text-center w-1/3">Formal Name</p>
+            <div className="flex items-center flex-row gap-4 w-full">
+               <p className="flex font-semibold justify-end text-center leading-4 w-1/3">Formal Name</p>
               <CustomInput
                 name="formalName"
                 type="text"
@@ -56,20 +72,24 @@ export default function CompanyCreation() {
 
           {/* ------ Set of two input Fields ----- */}
           <div className="flex mt-4 flex-row gap-4 mb-4 w-full">
-            <div className="flex flex-row gap-4 w-full">
-               <p className="flex font-semibold justify-end text-center w-1/3">State</p>
-              <CustomInput
-                name="state"
-                type="text"
-                value={formData.companyCreation.state}
-                onChange={handleChange}
-                placeholder="Enter your State"
-                className="w-full"
-              />
-            </div>
+          <div className="flex items-center flex-row gap-4 w-full">
+               <p className="flex leading-4 font-semibold justify-end text-center w-1/3">State</p>
 
-            <div className="flex gap-4 w-full">
-               <p className="flex font-semibold justify-end text-center w-1/3">Email</p>
+               <Select
+  options={LOCATIONS}  // Assuming LOCATIONS is an array of options like [{ value: 'NY', label: 'New York' }, ...]
+  value={formData.companyCreation.state ? [{ value: formData.companyCreation.state, label: formData.companyCreation.state }] : []}  // Set the value based on the formData
+  onChange={handleChangeselect}  // Call the handler when the selection changes
+  placeholder="Select a state"
+  labelField="label"
+  valueField="value"
+  searchable
+  clearable
+/>
+
+
+            </div>
+            <div className="flex items-center flex-row gap-4 w-full">
+               <p className="flex leading-4 font-semibold justify-end text-center w-1/3">Email</p>
               <CustomInput
                 name="email"
                 type="email"
@@ -83,8 +103,8 @@ export default function CompanyCreation() {
 
           {/* ------ Set of two input Fields ----- */}
           <div className="flex mt-4 flex-row gap-4 mb-4 w-full">
-            <div className="flex flex-row gap-4 w-full">
-               <p className="flex font-semibold justify-end text-center w-1/3">Phone</p>
+          <div className="flex items-center flex-row gap-4 w-full">
+               <p className="flex leading-4 font-semibold justify-end text-center w-1/3">Phone</p>
               <CustomInput
                 name="phone"
                 type="number"
@@ -94,9 +114,8 @@ export default function CompanyCreation() {
                 className="w-full"
               />
             </div>
-
-            <div className="flex gap-4 w-full">
-               <p className="flex font-semibold justify-end text-center w-1/3">Alt. Email</p>
+            <div className="flex items-center flex-row gap-4 w-full">
+               <p className="flex leading-4 font-semibold justify-end text-center w-1/3">Alt. Email</p>
               <CustomInput
                 name="alt_email"
                 type="email"
@@ -110,8 +129,8 @@ export default function CompanyCreation() {
 
           {/* ------ Set of two input Fields ----- */}
           <div className="flex mt-4 flex-row gap-4 mb-4 w-full">
-            <div className="flex flex-row gap-4 w-full">
-               <p className="flex font-semibold justify-end text-center w-1/3">Alt. Phone</p>
+          <div className="flex items-center flex-row gap-4 w-full">
+               <p className="flex leading-4 font-semibold justify-end text-center w-1/3">Alt. Phone</p>
               <CustomInput
                 name="alt_phone"
                 type="number"
@@ -122,7 +141,7 @@ export default function CompanyCreation() {
               />
             </div>
 
-            <div className="flex gap-4 w-full">
+            <div className="flex items-center leading-4 flex-row gap-4 w-full">
                <p className="flex font-semibold justify-end text-center w-1/3">
                 Salary Start Date
               </p>
@@ -139,8 +158,8 @@ export default function CompanyCreation() {
 
           {/* ------ Set of two input Fields ----- */}
           <div className="flex mt-4 flex-row gap-4 mb-4 w-full">
-            <div className="flex flex-row gap-4 w-full">
-               <p className="flex font-semibold justify-end text-center w-1/3">Pan No.</p>
+          <div className="flex leading-4 items-center flex-row gap-4 w-full">
+               <p className="flex font-semibold justify-end leading-4 text-center w-1/3">Pan No.</p>
               <CustomInput
                 name="pan_gir_no"
                 type="text"
@@ -151,8 +170,8 @@ export default function CompanyCreation() {
               />
             </div>
 
-            <div className="flex gap-4 w-full">
-               <p className="flex font-semibold justify-end text-center w-1/3">Tan No.</p>
+            <div className="flex items-center flex-row gap-4 w-full">
+               <p className="flex leading-4 font-semibold justify-end text-center w-1/3">Tan No.</p>
               <CustomInput
                 name="tan_no"
                 type="text"
@@ -166,8 +185,8 @@ export default function CompanyCreation() {
 
           {/* ------ Set of two input Fields ----- */}
           <div className="flex mt-4 flex-row gap-4 mb-4 w-full">
-            <div className="flex flex-row gap-4 w-full">
-               <p className="flex font-semibold justify-end text-center w-1/3">GST No.</p>
+          <div className="flex items-center flex-row gap-4 w-full">
+               <p className="flex leading-4 font-semibold justify-end text-center w-1/3">GST No.</p>
               <CustomInput
                 name="gst"
                 type="number"
@@ -178,8 +197,8 @@ export default function CompanyCreation() {
               />
             </div>
 
-            <div className="flex gap-4 w-full">
-               <p className="flex font-semibold justify-end text-center w-1/3">Company Code</p>
+            <div className="flex items-center flex-row gap-4 w-full">
+               <p className="flex leading-4 font-semibold justify-end text-center w-1/3">Company Code</p>
               <CustomInput
                 name="company_Code_payman_web"
                 type="number"
@@ -193,8 +212,8 @@ export default function CompanyCreation() {
 
               {/* ------ Address Fields ----- */}
               <div className="flex flex-row my-4 gap-4 w-full">
-            <div className="flex pl-6 flex-row gap-4 w-full">
-               <p className="flex font-semibold justify-end text-center ">Address</p>
+              <div className="flex items-center flex-row gap-4 w-full">
+               <p className="flex leading-4 font-semibold justify-end text-center ">Address</p>
               <textarea
                 name="address"
                 value={formData.companyCreation.address}
@@ -206,8 +225,8 @@ export default function CompanyCreation() {
           </div>
 
           {/* ------ Address Change Web ----- */}
-          <div className="flex mt-4 gap-4 w-full">
-             <p className="flex font-semibold  justify-end  text-center ">Address Change Web</p>
+          <div className="flex items-center flex-row gap-4 w-full">
+             <p className="flex font-semibold  justify-end leading-4 text-center ">Address Change Web</p>
             <CustomInput
               name="address_change_web"
               type="text"
@@ -222,30 +241,25 @@ export default function CompanyCreation() {
     );
   }
 
-
-
   return (
     <div className="w-[90vw]  bg-white mx-auto p-8  rounded-lg shadow-2xl text-center">
       <div className="flex justify-between mb-5 ">
         <h2 className="text-2xl text-black font-bold ">Company Creation</h2>
         <h2 className="text-md text-black font-bold ">
-          Step {activeStep + 1} of 4{" "}
+          Step {activeStep + 1} of 6{" "}
         </h2>
       </div>
+
 
       {/*  ------ input Feilds ------  */}
       {pfInputFeilds()}
       {/*  ------ input Feilds ------  */}
 
-     
-
-
-
       <div className="flex justify-end">
         <button
           onClick={nextStep}
           // onClick={showData}
-          className="bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600"
+          className="bg-blue-500 text-white cursor-pointer py-2 px-6 rounded-md hover:bg-blue-600"
         >
           Next
         </button>

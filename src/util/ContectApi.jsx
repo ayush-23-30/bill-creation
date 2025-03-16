@@ -87,7 +87,75 @@ export function FormDataProvider({ children }) {
       
       bonus_slab : "", 
       bonus_app_max : "", 
+    },
+    company_other_calclations : {
+      earning_rounded : "", 
+      earning_rounded_user_defined : "", 
+      round_nearest_price : "", 
+      earn_curr_month : "", 
+
+      no_of_salaryDay : "", 
+      gratutiy_year : '',
+      
+      shift_wise : "", 
+      shift_working_wise : "",
+      ot_max_till : "", 
+      nps_employer : "", 
+      nps_employee : "", 
+      lwf_employee_amt : "", 
+      lwf_employer_amt : "", 
+
+      overtime : "",
+      esi_app_ot : "",
+      overtime_salary_rate : "", 
+      pf_app_ot : "" , 
+    },
+
+    company_leave_management : {
+      leave_register : "", 
+      leave_rounded_to : "", 
+      monitor_leave_period : "",
+
+      earned_leave_calc_gross : "",
+      earned_leave_calc_formula : "" ,
+      enter_formula : "" , 
+      accrual_period : "", 
+      earned_leave_method : "",  // not implemented TIll now 
+      maximum_earned_leave : "", 
+      earned_leave_calc : "", 
+
+      medical_leave_carry : "", 
+      medical_leave_calc : "", 
+      maximum_medical_leave : "", 
+      casual_calc : "",
+    },
+
+    company_person_responsible : {
+      person_name : "", 
+      designation : "", 
+      flat : "", 
+      premises : "",
+      road_street : "" , 
+      area: "", 
+      town : "", 
+      state : "" , // not applicable 
+      pin : "" , 
+      phone : "" , 
+      fax : "", 
+      email : "", 
+      alt_phone : "", 
+      alt_email : "", 
+
+      address_change : "", 
+      non_tax_employee : "", 
+      deductor_type : "", 
+      tds_round : "" , 
+      cit_details : "", 
+      traces_user_name : "", 
+      traces_password : "",
     }
+
+
 
   });
 
@@ -102,8 +170,20 @@ export function FormDataProvider({ children }) {
     }));
   };
 
+  const updateSelect = (section, name, value) => {
+    console.log("Updating state:", section, name, value);  // Log the values to confirm
+    setFormData((prevState) => ({
+      ...prevState,
+      [section]: {
+        ...prevState[section],
+        [name]: value,
+      },
+    }));
+  };
+  
+
   return (
-    <FormDataContext.Provider value={{ formData, updateFormData }}>
+    <FormDataContext.Provider value={{ formData, updateFormData , updateSelect }}>
       {children}
     </FormDataContext.Provider>
   );

@@ -127,3 +127,45 @@
   background-color: red;
   color: yellow;
 }
+
+
+.react-dropdown-select {
+  background-color: #efefef;
+  border: 1px solid #ccc;
+  border-radius: 8px !important;
+  padding: 8px;
+  font-size: 16px !important;
+  color: black;
+  height: 42px !important;
+  width: 30vw !important;
+  min-width: 180px;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.react-dropdown-select-input {
+  color: black;
+}
+
+.react-dropdown-select-placeholder {
+  color: black !important;
+  font-size: 16px !important;
+}
+
+.react-dropdown-select-option {
+  padding: 10px;
+  border-radius: 4px;
+  color: black;
+}
+
+.react-dropdown-select-menu {
+  margin-top: 0px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.react-dropdown-select-single-value {
+  color: black;
+}
+
