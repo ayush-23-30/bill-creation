@@ -426,8 +426,8 @@ function CompanyPersonDetail() {
         </button>
         <div className="">
          <CustomButton
-                    // onClick={()=> toast.info("clicked")}
-                    onClick={showData}
+                    onClick={()=> toast.success("Data Saved")}
+                    // onClick={showData}
                     loading={loading}
                     disabled={false}
                   >
