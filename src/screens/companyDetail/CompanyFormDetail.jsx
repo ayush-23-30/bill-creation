@@ -6,11 +6,12 @@ import CompanyAlteration from "./CompanyAlteration";
 import Header from "../common/Header";
 import CompanyAlteration_two from "./CompanyAlteration_two";
 import CompanyCalculation from "./CompanyCalculation";
+import CompanyLeaveMan from "./CompanyLeaveMan";
+import CompanyPersonDetail from "./Company_person_detail";
 
 
 
 export default function WizardComponent() {
-
 
 
   return (
@@ -25,6 +26,8 @@ export default function WizardComponent() {
           <CompanyAlteration />
           <CompanyAlteration_two />
           <CompanyCalculation />
+          <CompanyLeaveMan />
+          <CompanyPersonDetail/>
         </Wizard>
 
     </div>

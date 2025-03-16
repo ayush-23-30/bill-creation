@@ -2,16 +2,30 @@ import React from "react";
 import { useWizard } from "react-use-wizard";
 import { CustomInput } from "../../util/utils";
 import { useFormData } from "@/util/ContectApi";
+import Select from "react-dropdown-select";
+import { yesNo } from "@/util/Data";
 
 export default function CompanyAlteration_two() {
   const { nextStep, previousStep, activeStep } = useWizard();
 
-  const { formData, updateFormData } = useFormData();
+  const { formData, updateFormData, updateSelect } = useFormData();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     updateFormData("companyAlteration_two", name, value);
   };
+
+  const handleChange_challan = (selected) => {
+    const selectedValue = selected[0]?.value;  // Extract value (not label)
+    updateSelect('companyAlteration_two', 'round_esi_challan', selectedValue); 
+  };
+
+ const showData = ()=> {
+  console.log("Company two", formData.companyAlteration_two)
+ }
+  // console.log("challan", formData.companyAlteration_two.round_esi_challan);
+  
+
 
   function pfInputFeilds() {
     return (
@@ -174,14 +188,33 @@ export default function CompanyAlteration_two() {
                 {" "}
                 Round ESI Challan Location Wise
               </p>
-              <CustomInput
+              <Select
+  options={yesNo}
+  value={
+    formData.companyAlteration_two?.round_esi_challan
+      ? [
+          {
+            value: formData.companyAlteration_two.round_esi_challan,
+            label: formData.companyAlteration_two.round_esi_challan,
+          },
+        ]
+      : []
+  }
+  onChange={handleChange_challan}
+  placeholder="Select EPF Pro Rate"
+  labelField="label"
+  valueField="value"
+  searchable
+  clearable
+/>
+              {/* <CustomInput
                 name="round_esi_challan"
                 type="text"
                 value={formData.companyAlteration_two.round_esi_challan}
                 onChange={handleChange}
                 placeholder="Enter Challan Location "
                 className="w-full"
-              />
+              /> */}
             </div>
           </div>
 
@@ -280,7 +313,7 @@ export default function CompanyAlteration_two() {
           Company Alteration Page - 2
         </h2>
         <h2 className="text-md text-black font-bold ">
-          Step {activeStep + 1} of 4{" "}
+          Step {activeStep + 1} of 6{" "}
         </h2>
       </div>
 
@@ -294,14 +327,14 @@ export default function CompanyAlteration_two() {
       <div className="flex justify-between">
         <button
           onClick={previousStep}
-          className="bg-gray-500 text-white py-2 px-6 rounded-md hover:bg-gray-600"
+          className="bg-gray-500 text-white cursor-pointer py-2 px-6 rounded-md hover:bg-gray-600"
         >
           Back
         </button>
         <button
           onClick={nextStep}
           // onClick={showData}
-          className="bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600"
+          className="bg-blue-500 text-white cursor-pointer py-2 px-6 rounded-md hover:bg-blue-600"
         >
           Next
         </button>

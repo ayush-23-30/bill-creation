@@ -2,11 +2,36 @@ import React from "react";
 import { useWizard } from "react-use-wizard";
 import { CustomInput } from "../../util/utils";
 import { useFormData } from "@/util/ContectApi";
+import { yesNo } from "@/util/Data";
+import Select from "react-dropdown-select";
 
 export default function CompanyAlteration() {
   const { nextStep, previousStep, activeStep } = useWizard();
 
-  const { formData, updateFormData } = useFormData();
+  const { formData, updateFormData, updateSelect } = useFormData();
+
+
+  const handleChange_eps = (selected) => {
+    const selectedValue = selected[0]?.value;  // Extract value (not label)
+    updateSelect('companyAlteration', 'eps_pro_rate', selectedValue); 
+  };
+  const handleChange_trust = (selected) => {
+    const selectedValue = selected[0]?.value;  // Extract value (not label)
+    updateSelect('companyAlteration', 'companies_pf_trust', selectedValue); 
+  };
+  const handleChange_epf = (selected) => {
+    const selectedValue = selected[0]?.value;  // Extract value (not label)
+    updateSelect('companyAlteration', 'epf_pro_rate', selectedValue); 
+  };
+  const handleChange_challan = (selected) => {
+    const selectedValue = selected[0]?.value;  // Extract value (not label)
+    updateSelect('companyAlteration', 'round_pf_challan', selectedValue); 
+  };
+
+  
+// console.log("eps_pro_rate", formData.companyAlteration?.eps_pro_rate);
+// console.log(".epf_pro_rate", formData.companyAlteration?.epf_pro_rate);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -141,14 +166,29 @@ export default function CompanyAlteration() {
                 {" "}
                 EPF Pro Rate *{" "}
               </p>
-              <CustomInput
-                name="epf_pro_rate"
-                type="text"
-                value={formData.companyAlteration.epf_pro_rate}
-                onChange={handleChange}
-                placeholder="Enter EPF PRO RATE"
-                className="w-full"
-              />
+
+              <Select
+  options={yesNo}
+  value={
+    formData.companyAlteration?.epf_pro_rate
+      ? [
+          {
+            value: formData.companyAlteration.epf_pro_rate,
+            label: formData.companyAlteration.epf_pro_rate,
+          },
+        ]
+      : []
+  }
+  onChange={handleChange_epf}
+  placeholder="Select EPF Pro Rate"
+  labelField="label"
+  valueField="value"
+  searchable
+  clearable
+/>
+
+              
+             
             </div>
 
             <div className="flex gap-4 items-center w-full">
@@ -156,14 +196,27 @@ export default function CompanyAlteration() {
                 {" "}
                 EPS Pro Rate *{" "}
               </p>
-              <CustomInput
-                name="eps_pro_rate"
-                type="text"
-                value={formData.companyAlteration.eps_pro_rate}
-                onChange={handleChange}
-                placeholder="Enter EPS PRO RATE "
-                className="w-full"
+
+              <Select
+                options={yesNo}
+                value={
+                  formData.companyAlteration?.eps_pro_rate
+                    ? [
+                        {
+                          value: formData.companyAlteration.eps_pro_rate,
+                          label: formData.companyAlteration.eps_pro_rate,
+                        },
+                      ]
+                    : []
+                }
+                onChange={handleChange_eps}
+                placeholder="Select EPF Pro Rate"
+                labelField="label"
+                valueField="value"
+                searchable
+                clearable
               />
+
             </div>
           </div>
 
@@ -465,16 +518,35 @@ export default function CompanyAlteration() {
             <div className="flex items-center flex-row gap-4 w-full">
               <p className="flex leading-4 font-semibold  justify-end text-center w-1/3">
                 {" "}
-                Conpany PF trust *{" "}
+                Conpany PF trust {" "}
               </p>
-              <CustomInput
+              <Select
+  options={yesNo}
+  value={
+    formData.companyAlteration?.companies_pf_trust
+      ? [
+          {
+            value: formData.companyAlteration.companies_pf_trust,
+            label: formData.companyAlteration.companies_pf_trust,
+          },
+        ]
+      : []
+  }
+  onChange={handleChange_trust}
+  placeholder="Select EPF Pro Rate"
+  labelField="label"
+  valueField="value"
+  searchable
+  clearable
+/>
+              {/* <CustomInput
                 name="companies_pf_trust"
                 type="text"
                 value={formData.companyAlteration.companies_pf_trust}
                 onChange={handleChange}
                 placeholder="Enter pf trust "
                 className="w-full"
-              />
+              /> */}
             </div>
 
             <div className="flex items-center gap-4 w-full">
@@ -500,16 +572,37 @@ export default function CompanyAlteration() {
                         justify-end text-center w-1/3"
               >
                 {" "}
-                PF challan location *{" "}
+                PF challan location {" "}
               </p>
-              <CustomInput
+
+              <Select
+  options={yesNo}
+  value={
+    formData.companyAlteration?.round_pf_challan
+      ? [
+          {
+            value: formData.companyAlteration.round_pf_challan,
+            label: formData.companyAlteration.round_pf_challan,
+          },
+        ]
+      : []
+  }
+  onChange={handleChange_challan}
+  placeholder="Select EPF Pro Rate"
+  labelField="label"
+  valueField="value"
+  searchable
+  clearable
+/>
+
+              {/* <CustomInput
                 name="round_pf_challan"
                 type="text"
                 value={formData.companyAlteration.round_pf_challan}
                 onChange={handleChange}
                 placeholder="Enter Round pf challan"
                 className="w-full"
-              />
+              /> */}
             </div>
 
             <div className="flex items-center gap-4 w-full">
@@ -567,7 +660,7 @@ export default function CompanyAlteration() {
       <div className="flex justify-between mb-5 ">
         <h2 className="text-2xl text-black font-bold ">Company Alteration</h2>
         <h2 className="text-md text-black font-bold ">
-          Step {activeStep + 1} of 4{" "}
+          Step {activeStep + 1} of 6{" "}
         </h2>
       </div>
 
@@ -580,14 +673,14 @@ export default function CompanyAlteration() {
       <div className="flex justify-between">
         <button
           onClick={previousStep}
-          className="bg-gray-500 text-white py-2 px-6 rounded-md hover:bg-gray-600"
+          className="bg-gray-500 cursor-pointer text-white py-2 px-6 rounded-md hover:bg-gray-600"
         >
           Back
         </button>
         <button
           onClick={nextStep}
           // onClick={showData}
-          className="bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600"
+          className="bg-blue-500 cursor-pointer text-white py-2 px-6 rounded-md hover:bg-blue-600"
         >
           Next
         </button>

@@ -59,7 +59,7 @@ export const CustomButton = ({
     <button
       onClick={onClick}
       disabled={loading || disabled}
-      className={`w-full text-white px-4 py-2 rounded-md flex items-center justify-center min-h-[40px] shadow-md transition
+      className={`w-full text-white px-4 py-2 rounded-md flex items-center cursor-pointer justify-center min-h-[40px] shadow-md transition
         ${loading || disabled ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"}
       `}
     >
