@@ -4,6 +4,8 @@ import hero from "../../assets/login_img.avif";
 import { CustomButton, CustomInput, PasswordInput } from "../../util/utils";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import apiCall from "@/sdk/apiCall";
+
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -13,25 +15,60 @@ function Login() {
 
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleSubmit = async (e) => {
+
     if (!email || !password) {
       // Checks for empty or undefined values
       setError(true);
-      toast.error("Please fill out both fields"); // Add a toast message for better feedback
+      toast.error("Please fill out both fields"); 
       return;
     }
-
-    setError(false); // Reset error state if inputs are valid
+    e.preventDefault(); // Prevent form submission
     setLoading(true);
+    setError(null);
+    try {
+      // Define the API endpoint for login
+      const url = '/api/auth/login';
 
-    setTimeout(() => {
-      setLoading(false);
-      console.log("Email: ", email);
-      console.log("Password: ", password);
-      navigate('/dashboard'); // Redirect to dashboard
-    }, 2000);
+      // Prepare the request payload
+      const data = {
+        username: email, 
+        password: password,
+      };
+
+      const result = await apiCall({
+        method: 'POST',
+        url,
+        data,
+        headers: {
+          'Content-Type': 'application/json', 
+        },
+      });
+
+      // Handle the response
+      if (result.error) {
+        toast.error(result.error)
+        throw new Error(result.error);
+      }
+
+      toast.success('Login Successful')
+      // console.log('Login successful:', result.data);
+      navigate('/dashboard')
+
+      // Optionally, save the token to localStorage or context
+      if (result.data.token) {
+        localStorage.setItem('authToken', result.data.token);
+      }
+    } catch (error) {
+      // Handle login error
+      toast.error(error.message)
+      console.error('Login error:', error);
+    } finally {
+      setLoading(false); // Reset loading state
+    }
   };
 
+  
   function loginInputField() {
     return (
       <div className=" mt-10 w-[90%] sm:w-[90%] md:w-[80%]">
@@ -66,7 +103,7 @@ function Login() {
         </div>
         <div className="mt-5">
           <CustomButton
-            onClick={handleClick}
+            onClick={handleSubmit}
             loading={loading}
             disabled={false}
           >
@@ -86,7 +123,7 @@ function Login() {
           className="relative bottom-12 md:bottom-0"
         />
         <div className="mt-6 md:mt-12">
-          <h2 className="text-3xl font-bold">Welcome back!</h2>
+          <h2 className="text-3xl text-black font-bold">Welcome back!</h2>
           <p className="text-gray-500 text-sm leading-2">
             Please Enter your Details.
           </p>
@@ -98,7 +135,7 @@ function Login() {
         {/* Divider */}
         <div className="w-[90%] sm:w-[90%] md:w-[80%] my-4 flex justify-center items-center">
           <div className="border-[1px] border-[#D0D5DD] flex-grow"></div>
-          <p className="text-lg mx-2 relative -top-[2px]">or</p>
+          <p className="text-lg mx-2 text-black relative -top-[2px]">or</p>
           <div className="border-[1px] border-[#D0D5DD] flex-grow"></div>
         </div>
 
@@ -107,11 +144,11 @@ function Login() {
           className="border-[1px] cursor-pointer w-[90%] sm:w-[90%] md:w-[80%] border-[#D0D5DD] rounded-md shadow-md text-center hover:bg-gray-200 transition"
           onClick={() => navigate("/sign-up")}
         >
-          <p className="flex justify-center font-semibold items-center p-2">
+          <p className="flex justify-center font-semibold text-black items-center p-2">
             Don't have an account?{" "}
-            <p className="text-blue-500 pl-1 underline hover:text-blue-700">
+            <span className="text-blue-500 pl-1 underline hover:text-blue-700">
               Sign-Up
-            </p>
+            </span>
           </p>
         </div>
       </div>
@@ -131,7 +168,7 @@ function Login() {
   }
 
   return (
-    <div className="w-full h-screen flex flex-col lg:flex-row justify-center lg:justify-start items-center overflow-hidden">
+    <div className="w-full h-screen bg-white flex flex-col lg:flex-row justify-center lg:justify-start items-center overflow-hidden">
       {loginScreenData()}
       {imageSideSection()}
     </div>

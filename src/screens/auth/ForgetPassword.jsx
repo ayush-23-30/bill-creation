@@ -19,7 +19,7 @@ function ForgetPassword() {
 
   function ForgetInputField() {
     return (
-      <div className=" mt-6 w-[90%] sm:w-[90%] md:w-[80%]">
+      <div className=" mt-6 w-[90%]  sm:w-[90%] md:w-[80%]">
         <div className="">
           <p className="text-md mb-[1px] text-gray-500">Email Address</p>
           <CustomInput
@@ -52,7 +52,7 @@ function ForgetPassword() {
           className="relative bottom-12 md:bottom-0"
         />
         <div className="mt-6 md:mt-12">
-          <h2 className="text-3xl font-bold">Forget Password?</h2>
+          <h2 className="text-3xl text-black font-bold">Forget Password?</h2>
           <div className="mt-2">
             <p className="text-gray-500 leading-3.5 text-sm leading-">
               Enter the email associated with your account and we’ll send an
@@ -68,7 +68,7 @@ function ForgetPassword() {
   }
 
   return (
-    <div className="w-full h-screen flex flex-col lg:flex-row justify-center items-center  overflow-hidden">
+    <div className="w-full h-screen bg-white flex flex-col lg:flex-row justify-center items-center  overflow-hidden">
       {ScreenData()}
     </div>
   );

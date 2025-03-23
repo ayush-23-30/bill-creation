@@ -3,12 +3,13 @@ import Header from "../common/Header";
 import { useNavigate } from "react-router-dom";
 
 export default function HeroSection() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
   function buttonForDetails() {
     return (
-      <>
+      <div className="flex  gap-3">
         <button
-          className=" h-12 text-center flex justify-between border-2 border-black text-md text-black px-6 py-2 rounded-full shadow-lg 
+          className=" h-12 font-semibold text-center flex justify-between border-2 border-black text-md text-black px-6 py-2 rounded-full shadow-lg 
           transition-all duration-300 ease-in-out 
           hover:bg-blue-500 hover:text-white hover:border-blue-500 
           cursor-pointer"
@@ -17,7 +18,7 @@ export default function HeroSection() {
           Add Company
           <div className="relative top-[2px]">
             <svg
-              class="w-6 h-6 ml-8 -mr-2"
+              className="w-6 h-6 ml-8 -mr-2"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -32,17 +33,42 @@ export default function HeroSection() {
             </svg>
           </div>
         </button>
-      </>
+        <button
+          className=" h-12 font-semibold text-center flex justify-between border-2 border-black text-md text-black px-6 py-2 rounded-full shadow-lg 
+          transition-all duration-300 ease-in-out 
+          hover:bg-green-500 hover:text-white hover:border-green-500 
+          cursor-pointer"
+          onClick={() => navigate("/all-company")}
+        >
+          View Company
+          <div className="relative top-[2px]">
+            <svg
+              className="w-6 h-6 ml-8 -mr-2"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+        </button>
+      </div>
     );
   }
 
   function svgsImage() {
     return (
       <>
-        <div class="grid grid-cols-1 px-20 mt-12 text-left gap-x-12 gap-y-8 sm:grid-cols-3 sm:px-0">
-          <div class="flex items-center">
+        <div className="grid grid-cols-1 px-20 mt-12 text-left gap-x-12 gap-y-8 sm:grid-cols-3 sm:px-0">
+          <div className="flex items-center">
             <svg
-              class="flex-shrink-0"
+              className="flex-shrink-0"
               width="31"
               height="25"
               viewBox="0 0 31 25"
@@ -84,12 +110,12 @@ export default function HeroSection() {
                 stroke-linejoin="round"
               />
             </svg>
-            <p class="ml-3 text-sm text-white">Over 100 Companies joined</p>
+            <p className="ml-3 text-sm text-white">Over 100 Companies joined</p>
           </div>
 
-          <div class="flex items-center">
+          <div className="flex items-center">
             <svg
-              class="flex-shrink-0"
+              className="flex-shrink-0"
               width="23"
               height="23"
               viewBox="0 0 23 23"
@@ -113,14 +139,14 @@ export default function HeroSection() {
                 stroke-linejoin="round"
               />
             </svg>
-            <p class="ml-3 text-sm text-white">
+            <p className="ml-3 text-sm text-white">
               No yearly charges, maximum limits
             </p>
           </div>
 
-          <div class="flex items-center">
+          <div className="flex items-center">
             <svg
-              class="flex-shrink-0"
+              className="flex-shrink-0"
               width="20"
               height="24"
               viewBox="0 0 20 24"
@@ -152,7 +178,9 @@ export default function HeroSection() {
                 stroke-linejoin="round"
               />
             </svg>
-            <p class="ml-3 text-sm text-white">Secured & safe online payment</p>
+            <p className="ml-3 text-sm text-white">
+              Secured & safe online payment
+            </p>
           </div>
         </div>
       </>
@@ -161,32 +189,31 @@ export default function HeroSection() {
 
   return (
     <>
-     
-      <div class="bg-gradient-to-b from-[#5e77e9] to-[#0070FA]">
-<Header/>
-        <section class="relative lg:min-h-[1000px] mb-4 pt-24 pb-10 sm:pt-32 sm:pb-16 lg:pb-24">
-          <div class="absolute inset-x-0 bottom-0 z-10 hidden lg:flex">
+      <div className="bg-gradient-to-b pb-12  md:pb-8 from-[#5e77e9] to-[#0070FA]">
+        <Header />
+        <section className="relative lg:min-h-[1000px] mb-4 pt-24 pb-10 sm:pt-32 sm:pb-16 lg:pb-24">
+          <div className="absolute inset-x-0 bottom-0 z-10 hidden lg:flex">
             <img
-              class="hidden w-full lg:block"
+              className="hidden w-full lg:block"
               src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/5/credit-cards.png"
               alt=""
             />
             <img
-              class="block w-full lg:hidden"
+              className="block w-full lg:hidden"
               src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/5/credit-cards-mobile.png"
               alt=""
             />
           </div>
 
-          <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative z-20">
-            <div class="max-w-xl mx-auto text-center">
-              <h1 class="text-4xl font-bold sm:text-6xl">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-white">
+          <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative z-20">
+            <div className="max-w-xl mx-auto text-center">
+              <h1 className="text-4xl font-bold sm:text-6xl">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-white">
                   {" "}
                   Simplified Company Management for Everyone.{" "}
                 </span>
               </h1>
-              <p class="mt-5 text-base text-white sm:text-xl">
+              <p className="mt-5 text-base text-white sm:text-xl">
                 No more hassle in making Management of employees and making
                 payments. Try Bill Creation , make your life simple.
               </p>

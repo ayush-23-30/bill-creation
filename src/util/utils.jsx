@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { FaEyeSlash } from "react-icons/fa";
 import { IoEyeSharp } from "react-icons/io5";
 import Spinner from "../screens/common/Spinner";
+
 
 export const CustomInput = ({
   type = "text",
@@ -17,7 +18,7 @@ export const CustomInput = ({
       placeholder={placeholder}
       onChange={onChange}
       value={value}
-      className={` border border-gray-400 bg-[#efefef] rounded-md p-2 w-full focus:outline-none  max-h-[42px] placeholder:text-black focus:ring-2 focus:ring-blue-500`}
+      className={` border text-black border-gray-400 bg-[#efefef] rounded-md p-2 w-full focus:outline-none  max-h-[42px] cursor-text placeholder:text-black focus:ring-2 focus:ring-blue-500`}
      
     />
   );
@@ -34,7 +35,7 @@ export const PasswordInput = ({ placeholder, value, onChange , name }) => {
         value={value}
         name = {name}
         onChange={onChange}
-        className="border border-gray-400 bg-[#efefef] rounded-md placeholder:text-black p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="border border-gray-400 bg-[#efefef] rounded-md placeholder:text-black p-2 w-full text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
       <button
         type="button"
@@ -67,4 +68,32 @@ export const CustomButton = ({
     </button>
   );
 };
+
+
+
+export const useKeyboardNavigation = (nextStep, previousStep) => {
+  useEffect(() => {
+    // Function to handle keydown events
+    const handleKeyDown = (e) => {
+      // Tab key to go to the next step
+      if (e.key === "Tab") {
+        nextStep();     
+      }
+
+      // Shift + Space to go to the previous step
+      if (e.shiftKey) {
+        previousStep();
+      }
+    };
+
+    // Add event listener for keydown
+    window.addEventListener("keydown", handleKeyDown);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [nextStep, previousStep]); // Only re-run if nextStep or previousStep changes
+};
+
 

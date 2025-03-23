@@ -1,12 +1,14 @@
 import React from "react";
 import { useWizard } from "react-use-wizard";
-import { CustomInput } from "../../util/utils";
+import { CustomInput, useKeyboardNavigation } from "../../util/utils";
 import { useFormData } from "@/util/ContectApi";
 import { yesNo } from "@/util/Data";
 import Select from "react-dropdown-select";
 
 export default function CompanyAlteration() {
   const { nextStep, previousStep, activeStep } = useWizard();
+
+  useKeyboardNavigation(nextStep, previousStep);
 
   const { formData, updateFormData, updateSelect } = useFormData();
 

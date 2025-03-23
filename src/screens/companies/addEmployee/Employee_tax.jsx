@@ -1,46 +1,49 @@
+import { useFormData } from '@/util/ContectApi';
+import { yesNo } from '@/util/Data';
+import { CustomInput, useKeyboardNavigation } from '@/util/utils';
 import React from 'react'
+import Select from 'react-dropdown-select';
+import { useWizard } from 'react-use-wizard';
 
-import { useWizard } from "react-use-wizard";
-import { CustomInput, useKeyboardNavigation } from "../../util/utils";
-import { toast } from "react-toastify";
-import { useState } from "react";
-import { useFormData } from "@/util/ContectApi";
-import Select from "react-dropdown-select";
-import { yesNo } from "@/util/Data";
-
-function CompanyLeaveMan() {
+function Employee_tax() {
   const { nextStep, previousStep, activeStep } = useWizard();
 
   const { formData, updateFormData, updateSelect } = useFormData();
 
+  const employeeTax = formData.employeeTax || {};
+  // console.log(employeeTax);
+
+  
+
    useKeyboardNavigation(nextStep, previousStep);
 
 
-   const handleChange_earned = (selected) => {
-    const selectedValue = selected[0]?.value; // Extract value (not label)
-    updateSelect("company_leave_management", "earned_leave_method", selectedValue);
-  };
-
   const handleChange_gross = (selected) => {
     const selectedValue = selected[0]?.value; // Extract value (not label)
-    updateSelect("company_leave_management", "earned_leave_calc_gross", selectedValue);
+    updateSelect("employeeTax", "earned_leave_calc_gross", selectedValue);
   };
+  const handleChange_earned = (selected) => {
+    const selectedValue = selected[0]?.value; // Extract value (not label)
+    updateSelect("employeeTax", "earned_leave_method", selectedValue);
+  };
+
+
   const handleChange_formula = (selected) => {
     const selectedValue = selected[0]?.value; // Extract value (not label)
-    updateSelect("company_leave_management", "earned_leave_calc_formula", selectedValue);
+    updateSelect("employeeTax", "earned_leave_calc_formula", selectedValue);
   };
   const handleChange_carry = (selected) => {
     const selectedValue = selected[0]?.value; // Extract value (not label)
-    updateSelect("company_leave_management", "medical_leave_carry", selectedValue);
+    updateSelect("employeeTax", "medical_leave_carry", selectedValue);
   };
   const handleChange_leave_round = (selected) => {
     const selectedValue = selected[0]?.value; // Extract value (not label)
-    updateSelect("company_leave_management", "leave_rounded_to", selectedValue);
+    updateSelect("employeeTax", "leave_rounded_to", selectedValue);
   };
   const handleChange_leave_period = (selected) => {
     const selectedValue = selected[0]?.value; // Extract value (not label)
     updateSelect(
-      "company_leave_management",
+      "employeeTax",
       "monitor_leave_period",
       selectedValue
     );
@@ -48,11 +51,11 @@ function CompanyLeaveMan() {
  
   const handleChange = (e) => {
     const { name, value } = e.target;
-    updateFormData("company_leave_management", name, value); // 'companyAlteration' section
+    updateFormData("employeeTax", name, value); // 'companyAlteration' section
   };
 
   const showData = ()=> {
-    console.log("Data ", formData.company_leave_management);
+    console.log("Data ", formData.employeeTax);
   }
 
   //  earning_rounded_user_defined  earning_rounded
@@ -69,7 +72,7 @@ function CompanyLeaveMan() {
               <CustomInput
                 name="leave_register"
                 type="text"
-                value={formData.company_leave_management.leave_register}
+                value={formData?.employeeTax.leave_register}
                 onChange={handleChange}
                 placeholder="Leave Register"
                 className="w-full"
@@ -83,13 +86,13 @@ function CompanyLeaveMan() {
               <Select
                 options={yesNo}
                 value={
-                  formData.company_leave_management?.leave_rounded_to
+                  formData.employeeTax?.leave_rounded_to
                     ? [
                         {
                           value:
-                            formData.company_leave_management.leave_rounded_to,
+                            formData.employeeTax.leave_rounded_to,
                           label:
-                            formData.company_leave_management.leave_rounded_to,
+                            formData.employeeTax.leave_rounded_to,
                         },
                       ]
                     : []
@@ -105,16 +108,16 @@ function CompanyLeaveMan() {
           <div className="flex  flex-row gap-4 mb-4 w-full">
             <div className="flex items-center flex-row gap-4 w-full">
               <p className="flex leading-4 font-semibold  justify-end text-center w-1/3">
-                Earning Rounded to Nearest Paise**
+                Menitor Leave Period**
               </p>
               <Select
                 options={yesNo}
                 value={
-                  formData.company_leave_management?.monitor_leave_period
+                  formData.employeeTax?.monitor_leave_period
                     ? [
                         {
-                          value: formData.company_leave_management.monitor_leave_period,
-                          label: formData.company_leave_management.monitor_leave_period,
+                          value: formData.employeeTax.monitor_leave_period,
+                          label: formData.employeeTax.monitor_leave_period,
                         },
                       ]
                     : []
@@ -147,13 +150,13 @@ function CompanyLeaveMan() {
               <Select
                 options={yesNo}
                 value={
-                  formData.company_leave_management?.earned_leave_calc_gross
+                  formData.employeeTax?.earned_leave_calc_gross
                     ? [
                         {
                           value:
-                            formData.company_leave_management.earned_leave_calc_gross,
+                            formData.employeeTax.earned_leave_calc_gross,
                           label:
-                            formData.company_leave_management.earned_leave_calc_gross,
+                            formData.employeeTax.earned_leave_calc_gross,
                         },
                       ]
                     : []
@@ -172,13 +175,13 @@ function CompanyLeaveMan() {
               <Select
                 options={yesNo}
                 value={
-                  formData.company_leave_management?.earned_leave_calc_formula
+                  formData.employeeTax?.earned_leave_calc_formula
                     ? [
                         {
                           value:
-                            formData.company_leave_management.earned_leave_calc_formula,
+                            formData.employeeTax.earned_leave_calc_formula,
                           label:
-                            formData.company_leave_management.earned_leave_calc_formula,
+                            formData.employeeTax.earned_leave_calc_formula,
                         },
                       ]
                     : []
@@ -200,7 +203,7 @@ function CompanyLeaveMan() {
               <CustomInput
                 name="enter_formula"
                 type="text"
-                value={formData.company_leave_management.enter_formula}
+                value={formData.employeeTax.enter_formula}
                 onChange={handleChange}
                 placeholder="Enter Formula"
                 className="w-full"
@@ -214,12 +217,15 @@ function CompanyLeaveMan() {
               <CustomInput
                 name="accrual_period"
                 type="text"
-                value={formData.company_leave_management.accrual_period}
+                value={formData.employeeTax.accrual_period}
                 onChange={handleChange}
                 placeholder="Accrual Period"
                 className="w-full"
               />
             </div>
+          </div>
+
+          <div className="flex mt-4 flex-row gap-4 mb-4 w-full">
 
           <div className="flex items-center flex-row gap-4 w-full">
               <p className="flex leading-4 font-semibold  justify-end text-center w-1/3">
@@ -246,9 +252,7 @@ function CompanyLeaveMan() {
               />
 
             </div>
-          </div>
 
-          <div className="flex mt-4 flex-row gap-4 mb-4 w-full">
             <div className="flex items-center flex-row gap-4 w-full">
               <p className="flex leading-4 font-semibold  justify-end text-center w-1/3">
                 {" "}
@@ -257,31 +261,14 @@ function CompanyLeaveMan() {
               <CustomInput
                 name="maximum_earned_leave"
                 type="text"
-                value={formData.company_leave_management.maximum_earned_leave}
+                value={formData.employeeTax.maximum_earned_leave}
                 onChange={handleChange}
                 placeholder= " Maximum Earned leaves"
                 className="w-full"
               />
             </div>
 
-            <div className="flex items-center gap-4 w-full">
-              <p className="flex leading-4 font-semibold  justify-end text-center w-1/3">
-                {" "}
-                No. of Days for Earned Leave Calculation
-              </p>
-              <CustomInput
-                name="earned_leave_calc"
-                type="text"
-                value={formData.company_leave_management.earned_leave_calc}
-                onChange={handleChange}
-                placeholder="Days for earned Leave "
-                className="w-full"
-              />
-            </div>
           </div>
-
-
-
         </div>
       </>
     );
@@ -300,11 +287,11 @@ function CompanyLeaveMan() {
               <Select
                 options={yesNo}
                 value={
-                  formData.company_leave_management?.medical_leave_carry
+                  formData.employeeTax?.medical_leave_carry
                     ? [
                         {
-                          value: formData.company_leave_management.medical_leave_carry,
-                          label: formData.company_leave_management.medical_leave_carry,
+                          value: formData.employeeTax.medical_leave_carry,
+                          label: formData.employeeTax.medical_leave_carry,
                         },
                       ]
                     : []
@@ -323,7 +310,7 @@ function CompanyLeaveMan() {
               <CustomInput
                 name="medical_leave_calc"
                 type="text"
-                value={formData.company_leave_management.medical_leave_calc}
+                value={formData.employeeTax.medical_leave_calc}
                 onChange={handleChange}
                 placeholder=" Medical Leave Calculations "
                 className="w-full"
@@ -341,7 +328,7 @@ function CompanyLeaveMan() {
               <CustomInput
                 name="maximum_medical_leave"
                 type="text"
-                value={formData.company_leave_management.maximum_medical_leave}
+                value={formData.employeeTax.maximum_medical_leave}
                 onChange={handleChange}
                 placeholder=" Medical Leave"
                 className="w-full"
@@ -356,7 +343,7 @@ function CompanyLeaveMan() {
               <CustomInput
                 name="casual_calc"
                 type="text"
-                value={formData.company_leave_management.casual_calc}
+                value={formData.employeeTax.casual_calc}
                 onChange={handleChange}
                 placeholder="Causal Calculations"
                 className="w-full"
@@ -407,5 +394,4 @@ function CompanyLeaveMan() {
   );
 }
 
-
-export default CompanyLeaveMan
+export default Employee_tax
