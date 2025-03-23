@@ -13,7 +13,6 @@ import CompanyPersonDetail from "./Company_person_detail";
 
 export default function WizardComponent() {
 
-
   return (
     <>
     <div className="bg-gradient-to-b from-[#5e77e9] to-[#0070FA]  text-white">

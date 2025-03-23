@@ -1,5 +1,5 @@
 import { useWizard } from "react-use-wizard";
-import { CustomInput } from "../../util/utils";
+import { CustomInput, useKeyboardNavigation } from "../../util/utils";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { useFormData } from "@/util/ContectApi";
@@ -10,6 +10,8 @@ export default function CompanyCalculation() {
   const { nextStep, previousStep, activeStep } = useWizard();
 
   const { formData, updateFormData, updateSelect } = useFormData();
+
+   useKeyboardNavigation(nextStep, previousStep);
 
   const handleChange_overtime = (selected) => {
     const selectedValue = selected[0]?.value; // Extract value (not label)
@@ -108,7 +110,7 @@ export default function CompanyCalculation() {
             </div>
           </div>
 
-          <div className="flex  flex-row gap-4 mb-4 w-full">
+          <div className="flex mt-8 flex-row gap-4 mb-4 w-full">
             <div className="flex items-center flex-row gap-4 w-full">
               <p className="flex leading-4 font-semibold  justify-end text-center w-1/3">
                 Earning Rounded to Nearest Paise**
@@ -131,9 +133,6 @@ export default function CompanyCalculation() {
                 valueField="value"
               />
             </div>
-          </div>
-
-          <div className="flex  flex-row gap-4 mb-4 w-full">
             <div className="flex items-center flex-row gap-4 w-full">
               <p className="flex leading-4 font-semibold  justify-end text-center w-1/3">
                 Earning to be Rounded as % user defined based Earnings **
@@ -156,6 +155,10 @@ export default function CompanyCalculation() {
                 valueField="value"
               />
             </div>
+          </div>
+
+          <div className="flex  flex-row gap-4 mb-4 w-full">
+            
           </div>
         </div>
       </>
@@ -181,7 +184,7 @@ export default function CompanyCalculation() {
                 className="w-full"
               />
             </div>
-          </div>
+
 
           <div className="flex gap-4 items-center w-full">
             <p className="flex leading-4 font-semibold justify-end text-center w-1/3">
@@ -196,6 +199,8 @@ export default function CompanyCalculation() {
               className="w-full"
             />
           </div>
+          </div>
+
         </div>
       </>
     );

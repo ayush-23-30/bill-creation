@@ -65,7 +65,7 @@ function SignUp() {
       <>
         <div className="w-full max-w-md ">
           <img src={logo} width={130} className="mb-4" alt="Logo" />
-          <h2 className="text-3xl font-bold">Welcome!</h2>
+          <h2 className="text-3xl text-black font-bold">Welcome!</h2>
           <p className="text-gray-500 text-sm">
             Please enter your details to create an account.
           </p>
@@ -127,7 +127,7 @@ function SignUp() {
 
             <select
               name="gender"
-              className="border border-gray-300 rounded-md p-2 w-full  focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border bg-[#efefef] text-black border-gray-300 rounded-md p-2 w-full  focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={formData.gender}
               onChange={handleChange}
             >
@@ -186,7 +186,7 @@ function SignUp() {
 
           <div className="w-full my-4 flex justify-center items-center">
             <div className="border-t w-full border-gray-300"></div>
-            <p className="text-lg mx-2">or</p>
+            <p className="text-lg text-black mx-2">or</p>
             <div className="border-t w-full border-gray-300"></div>
           </div>
 
@@ -196,7 +196,7 @@ function SignUp() {
             className="border cursor-pointer w-full border-gray-300 rounded-md shadow-md text-center py-2 hover:bg-gray-200 transition"
             onClick={() => navigate("/")}
           >
-            <p className="font-semibold">
+            <p className="font-semibold text-black">
               Have an account?{" "}
               <span
                 // href="#"
@@ -226,7 +226,7 @@ function SignUp() {
   }
 
   return (
-    <div className="w-full min-h-screen flex flex-col lg:flex-row overflow-hidden">
+    <div className="w-full bg-white min-h-screen flex flex-col lg:flex-row overflow-hidden">
       {/* Left Section (Header + Form) */}
       <div className="w-full lg:w-1/2 flex flex-col items-center px-6 md:px-20 py-10">
         {/* Header Section */}

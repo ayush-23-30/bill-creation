@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useWizard } from "react-use-wizard";
-import { CustomInput } from "../../util/utils";
+import { CustomInput, useKeyboardNavigation } from "../../util/utils";
 import { useFormData } from "@/util/ContectApi";
 import { LOCATIONS } from "@/util/Data";
 import Select from "react-dropdown-select";
@@ -13,6 +13,7 @@ export default function CompanyCreation() {
   const { nextStep, activeStep } = useWizard();
   const { formData, updateFormData , updateSelect } = useFormData();
 
+   useKeyboardNavigation(nextStep,'');
 
   // const [selectedLocation, setSelectedLocation] = useState(null);
 

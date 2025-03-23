@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useWizard } from "react-use-wizard";
-import { CustomButton, CustomInput } from "../../util/utils";
+import { CustomButton, CustomInput, useKeyboardNavigation } from "../../util/utils";
 import { useState } from "react";
 import { useFormData } from "@/util/ContectApi";
 import Select from "react-dropdown-select";
@@ -17,8 +17,10 @@ function CompanyPersonDetail() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    updateFormData('company_person_responsible', name, value);  // 'company_person_responsible' section
+    updateFormData('company_person_responsible', name, value);  
   };
+
+   useKeyboardNavigation(nextStep, previousStep);
 
   const handleChange_cti = (selected) => {
     const selectedValue = selected[0]?.value;  // Extract value (not label)
@@ -426,8 +428,8 @@ function CompanyPersonDetail() {
         </button>
         <div className="">
          <CustomButton
-                    onClick={()=> toast.success("Data Saved")}
-                    // onClick={showData}
+                    // onClick={()=> toast.success("Data Saved")}
+                    onClick={showData}
                     loading={loading}
                     disabled={false}
                   >
@@ -435,15 +437,7 @@ function CompanyPersonDetail() {
                   </CustomButton>
 
         </div>
-        {/* <button
-          // onClick={nextStep}
-          // onClick={() => toast.success("Till Now this is the last page")}
-          // onClick={showData}
-          className="bg-blue-500 cursor-pointer
-           text-white py-2 px-6 rounded-md hover:bg-blue-600"
-        > */}
-          {/* Next */}
-        {/* </button> */}
+        
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import { useWizard } from "react-use-wizard";
-import { CustomInput } from "../../util/utils";
+import { CustomInput, useKeyboardNavigation } from "../../util/utils";
 import { useFormData } from "@/util/ContectApi";
 import Select from "react-dropdown-select";
 import { yesNo } from "@/util/Data";
@@ -9,6 +9,8 @@ export default function CompanyAlteration_two() {
   const { nextStep, previousStep, activeStep } = useWizard();
 
   const { formData, updateFormData, updateSelect } = useFormData();
+
+   useKeyboardNavigation(nextStep, previousStep);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -131,7 +133,8 @@ export default function CompanyAlteration_two() {
     );
   }
 
-  function centerFeilds() {
+  function centerFeilds(
+  ) {
     return (
       <>
         <div className="flex border-2 p-4 mt-6 rounded-2xl flex-wrap mb-6 text-black">

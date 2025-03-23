@@ -120,7 +120,7 @@ export function FormDataProvider({ children }) {
       earned_leave_calc_formula : "" ,
       enter_formula : "" , 
       accrual_period : "", 
-      earned_leave_method : "",  // not implemented TIll now 
+      earned_leave_method : "",  
       maximum_earned_leave : "", 
       earned_leave_calc : "", 
 
@@ -153,10 +153,158 @@ export function FormDataProvider({ children }) {
       cit_details : "", 
       traces_user_name : "", 
       traces_password : "",
+    },
+
+    // --------- ADD Employee ---------
+
+    employeeCreation: {
+      employeeName: "",
+      formalName: "",
+      code: "",
+      gender : "",
+      father_husband_name : "", 
+      father_husband : "", 
+      Dob : "", 
+      Doj : "", 
+      Doc : "", 
+      Doi : "", 
+      pd : "",
+      salary_calc : "", 
+      grade : "", 
+      location : "", 
+      designation : "",
+      department : "",
+      state_tx : '',
+      pre_address: "",
+      perm_address: "",
+      pre_city: "", 
+      perm_city: "", 
+      pre_state : "", 
+      perm_state : "",
+      email: "",
+      phone: "",
+      pre_pin : "", 
+      perm_pin : "", 
+      alt_phone: "",
+    },
+
+    employeeAlteration: {
+      category: "",
+      retirement_date: "",
+     salutation : "",
+      min_wages_category: "",
+      dimensional : "",
+      dimensional2: "",
+      dimensional3: "",
+      dimensional4: "",  // should be a selection box
+      dimensional5: "",  // should be a selection box
+      NPS: "",
+      LWF: "",
+      joining_status: "",
+      pranNo: "",
+      current_status: "",
+      allowed_salary: "",
+      curr_location : "",
+      salary_export : "", 
+      doLI : "",
+      doNI : "",
+
+      doLP : "",
+      doA : "", 
+    },
+
+    employeeAlteration_two :{
+      pf : "", 
+      EPS : "", 
+      VPF  : "" ,
+      rate: "",  
+      vpfAmount : "", 
+      pfNo : "", 
+      pfDate : "" , 
+      prev_pf : "", 
+      prev_pf_date : "",
+      pf_calc_slab: "", 
+      pf_calc_basic: "", 
+      pf_trust: "", 
+      pf_deposited: "", 
+      posted_other: "", 
+     eps_calc : "",
+      uanNo: "", 
+
+ 
+      esi_no_yes : "", 
+      esi_no : "", 
+      esi_dispensary : "", 
+      other_remarks: "", 
+      
+    },
+
+    employeePayment : {
+      paymentMode : "", 
+      SalaryBankName : "",
+      SalaryAccNo : "",
+      Ifsccode : "",
+      // salary_bank : "", 
+      draft_telex : "", 
+      allowBank_no : '',
+      allowance_bank : "", 
+      all_ifsc_code : "",
+      march_paid : "", 
+      shift_wise : "", 
+      shift_Working : "", 
+      d_wages : "", 
+      ot : "", 
+      exgratia : "",
+      OtRate : "",
+      bonus : "", 
+      HolidayPaid : "" , 
+    },
+
+    employeeTax : {
+      leave_register : "", 
+      leave_rounded_to : "", 
+      monitor_leave_period : "",
+
+      earned_leave_calc_gross : "",
+      earned_leave_calc_formula : "" ,
+      enter_formula : "" , 
+      accrual_period : "", 
+      earned_leave_method : "",  
+      // earned_leave_calc : "", 
+      maximum_earned_leave : "", 
+
+      medical_leave_carry : "", 
+      medical_leave_calc : "", 
+      maximum_medical_leave : "", 
+      casual_calc : "",
+    },
+    
+    earning : {
+      basic : "Basic",
+      amount_basic : "", 
+      vda : "VDA", 
+      amount_vda :  "", 
+      hra : "HRA",
+      amount_hra : "",
+      conveyance : "Conveyance",
+      amount_conveyance : "",
+      others: "Others", 
+      amount_others: "",
+      total : "",
+    }, 
+    deduction : {
+      basic : "Basic",
+      amount_basic : "", 
+      vda : "VDA", 
+      amount_vda :  "", 
+      hra : "HRA",
+      amount_hra : "",
+      conveyance : "Conveyance",
+      amount_conveyance : "",
+      others: "Others", 
+      amount_others: "",
+      total : "",
     }
-
-
-
   });
 
   // Update a specific field in the form data

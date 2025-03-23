@@ -37,8 +37,29 @@ export const LOCATIONS = [
   { value: "wb", label: "West Bengal" },
 ];
 
-
 export const yesNo = [
-  {value : "yes" , label : "Yes"}, 
-  {value : "no" , label : "No"}, 
+  { value: "yes", label: "Yes" },
+  { value: "no", label: "No" },
+];
+
+export const gender = [
+  {
+    value: "Male",
+    label: "Male",
+  },
+  { value: "Female", label: "female" },
+  { value: "Other", label: "Other" },
+];
+
+export const paymentMode = [
+  { value: "Cash", label: "Cash" },
+  { value: "Bank", label: "Bank" },
+  { value: "Cheque", label: "Cheque" },
+  { value: "NEFT", label: "NEFT" },
+  { value: "Draft", label: "Draft" }
+];
+
+export const F_H = [
+  {value : "Father" , label : "Father"}, 
+  {value : "Husband" , label : "Husband"} 
 ]
