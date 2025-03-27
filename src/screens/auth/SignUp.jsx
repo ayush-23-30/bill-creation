@@ -15,6 +15,7 @@ function SignUp() {
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const[error, setError] = useState(false);
 
   const navigate = useNavigate();
 
@@ -49,6 +50,61 @@ function SignUp() {
       newErrors.confirmPassword = "Passwords do not match.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+
+  const handleSubmit = async (e) => {
+
+    if (!email || !password) {
+      setError(true);
+      toast.error("Please fill out both fields"); 
+      return;
+    }
+    e.preventDefault(); 
+    setLoading(true);
+    setError(null);
+    try {
+      
+      const url = '/api/auth/register';
+
+      // Prepare the request payload
+      const data = {
+        username: formData.name,
+        email: formData.email,
+        phone: formData.phone, 
+        password: formData.password,
+      };
+
+      const result = await apiCall({
+        method: 'POST',
+        url,
+        data,
+        headers: {
+          'Content-Type': 'application/json', 
+        },
+      });
+
+      // Handle the response
+      if (result.error) {
+        toast.error(result.error)
+        throw new Error(result.error);
+      }
+
+      toast.success('Login Successful')
+      // console.log('Login successful:', result.data);
+      navigate('/dashboard')
+
+      // Optionally, save the token to localStorage or context
+      if (result.data.token) {
+        localStorage.setItem('authToken', result.data.token);
+      }
+    } catch (error) {
+      // Handle login error
+      toast.error(error.message)
+      console.error('Login error:', error);
+    } finally {
+      setLoading(false); // Reset loading state
+    }
   };
 
   const handleClick = () => {

@@ -38,9 +38,9 @@ function deductions() {
   };
 
     function showData(){
-      if(formData.deduction.total === 'N/A'){
-        toast.info('Please Update Total to save the data')
-      }else{
+     if (formData.deduction.total == "") {
+          toast.error("Please Update Total to save the data")
+     }else{
       console.log("cration", formData);
     }
   }
