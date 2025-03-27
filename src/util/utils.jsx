@@ -1,15 +1,14 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { FaEyeSlash } from "react-icons/fa";
 import { IoEyeSharp } from "react-icons/io5";
-import Spinner from "../screens/common/Spinner";
-
+import Spinner from "../screens/common/PageLoader";
 
 export const CustomInput = ({
   type = "text",
   placeholder,
   value,
   onChange,
-  name 
+  name,
 }) => {
   return (
     <input
@@ -19,12 +18,11 @@ export const CustomInput = ({
       onChange={onChange}
       value={value}
       className={` border text-black border-gray-400 bg-[#efefef] rounded-md p-2 w-full focus:outline-none  max-h-[42px] cursor-text placeholder:text-black focus:ring-2 focus:ring-blue-500`}
-     
     />
   );
 };
 
-export const PasswordInput = ({ placeholder, value, onChange , name }) => {
+export const PasswordInput = ({ placeholder, value, onChange, name }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -33,7 +31,7 @@ export const PasswordInput = ({ placeholder, value, onChange , name }) => {
         type={showPassword ? "text" : "password"}
         placeholder={placeholder}
         value={value}
-        name = {name}
+        name={name}
         onChange={onChange}
         className="border border-gray-400 bg-[#efefef] rounded-md placeholder:text-black p-2 w-full text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
@@ -61,7 +59,11 @@ export const CustomButton = ({
       onClick={onClick}
       disabled={loading || disabled}
       className={`w-full text-white px-4 py-2 rounded-md flex items-center cursor-pointer justify-center min-h-[40px] shadow-md transition
-        ${loading || disabled ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"}
+        ${
+          loading || disabled
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-blue-500 hover:bg-blue-600"
+        }
       `}
     >
       {loading ? <Spinner size="w-5 h-5" /> : children}
@@ -69,15 +71,13 @@ export const CustomButton = ({
   );
 };
 
-
-
 export const useKeyboardNavigation = (nextStep, previousStep) => {
   useEffect(() => {
     // Function to handle keydown events
     const handleKeyDown = (e) => {
       // Tab key to go to the next step
       if (e.key === "Tab") {
-        nextStep();     
+        nextStep();
       }
 
       // Shift + Space to go to the previous step
@@ -95,5 +95,3 @@ export const useKeyboardNavigation = (nextStep, previousStep) => {
     };
   }, [nextStep, previousStep]); // Only re-run if nextStep or previousStep changes
 };
-
-

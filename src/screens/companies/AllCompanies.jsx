@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../common/Header";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import axiosInstance from "@/sdk/axois";
+import { useEffect } from "react";
+import PageLoader from "../common/PageLoader";
 
 const companies = [
   { id: "1sjkb2", name: "Tech Innovators" },
@@ -10,6 +13,29 @@ const companies = [
 ];
 
 function AllCompanies() {
+  const [loading, setLoading] = useState(false);
+  const [CompanyData, setCompanyData] = useState([]);
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await axiosInstance.get("/api/organizations/get-all");
+      setCompanyData(response.data);
+      console.log(CompanyData);
+      toast.success("Data fetched successfully!");
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      toast.error(error.message);
+      setError(error.message); // Set error state for further handling if needed
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   function pagetitle() {
     return (
       <>
@@ -38,7 +64,8 @@ function AllCompanies() {
   function companyTable() {
     return (
       <>
-        <div className="w-[75%] px-5 rounded-lg mt-10 bg-white mx-auto">
+        <div className="w-[75%] px-5 rounded-lg mt-10 bg-white mx-auto"> 
+        
           {/* Title Section */}
           <div className="flex justify-between font-raleway text-black font-semibold text-lg pt-4">
             <span className="text-left">Company Name</span>
@@ -46,20 +73,26 @@ function AllCompanies() {
           </div>
 
           {/* Company List */}
-          {companies.map((company, index) => (
-            <div
-              key={company.id}
-              onClick={() => goToCompany(company.id, company.name)}
-              className={`flex justify-between items-center text-black w-full cursor-pointer py-2 ${
-                index !== companies.length - 1 ? "border-b" : ""
-              }`}
-            >
-              <span className="text-left font-poppins   font-medium">
-                {company.name}
-              </span>
-              <span className="text-right font-open-sans ">#{company.id}</span>
-            </div>
-          ))}
+          {CompanyData.map(([id, name], index) => (
+  <div
+    key={id}
+    onClick={() => goToCompany(id,name)} 
+    // Use `id` and `name` here
+    className={`flex justify-between items-center text-black w-full cursor-pointer py-2 ${
+      index !== CompanyData.length - 1 ? "border-b" : ""
+    }`}
+  >
+    <span className="text-left font-poppins font-medium">
+      {name || "N/A"}
+    </span>
+
+    <span className="text-right font-open-sans">
+      #{id || "N/A"}
+    </span>
+  </div>
+))}
+
+
         </div>
       </>
     );
@@ -67,8 +100,14 @@ function AllCompanies() {
 
   return (
     <div className="bg-gradient-to-b from-[#5e77e9] to-[#0070FA] h-[100vh]">
-      {pagetitle()}
-      {companyTable()}
+     
+      {loading ? <PageLoader/> : 
+      <div>
+        {pagetitle()}
+        {companyTable()}
+      </div>
+      } 
+
     </div>
   );
 }

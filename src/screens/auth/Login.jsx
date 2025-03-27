@@ -5,6 +5,7 @@ import { CustomButton, CustomInput, PasswordInput } from "../../util/utils";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import apiCall from "@/sdk/apiCall";
+import axiosInstance from "@/sdk/axois";
 
 
 function Login() {
@@ -15,9 +16,49 @@ function Login() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
 
+ 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    
     if (!email || !password) {
+      toast.error('Please fill in both fields');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await axiosInstance.post('/api/auth/login', {
+        username: email, 
+         password
+      });
+      localStorage.setItem('authToken', response.data.token);
+      
+      toast.success('Login successful!');
+      navigate('/dashboard'); 
+    } catch (error) {
+      let errorMessage = 'Login failed';
+      
+      if (error.response) {
+    
+        errorMessage = error.response.data.message || errorMessage;
+        
+        // Handle 401 specifically if needed
+        if (error.response.status === 401) {
+          errorMessage = 'Invalid credentials';
+        }
+      }
+      
+      toast.error(errorMessage);
+      console.error('Login error:', error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    if (!email || !password){
       // Checks for empty or undefined values
       setError(true);
       toast.error("Please fill out both fields"); 
@@ -103,7 +144,8 @@ function Login() {
         </div>
         <div className="mt-5">
           <CustomButton
-            onClick={handleSubmit}
+            onClick={handleLogin}
+            // onClick={handleSubmit}
             loading={loading}
             disabled={false}
           >
